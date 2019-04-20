@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
-// const multipart = require('connect-multiparty')
-// const multipartMiddleware = multipart({})
-// const intercept = require('../routes/intercept')
+const jwt = require('jsonwebtoken');
 
 const userApi = require('../api/userApi.js')
 
@@ -16,7 +14,29 @@ const adminApi = require('../api/adminApi.js')
 const publicApi = require('../api/publicApi.js')
 
 // ------- 管理 -------
-router.post('/admin/login', adminApi.login) //删除活动信息
+router.post('/admin/login', adminApi.login) // 登录
+router.use(function (req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, "app.get(superSecret)", function (err, decoded) {
+            if (err) {
+                return res.json({
+                    code: 401,
+                    message: 'token无效'
+                })
+            } else {
+                req.decoded = decoded;
+                next(); //继续下一步路由
+            }
+        });
+    } else {
+        // 没有拿到token 返回错误 
+        return res.json({
+            code: 401,
+            message: '没有找到token'
+        })
+    }
+});
 router.get('/admin/getUser', adminApi.getAllUser) //获取微信用户信息
 router.get('/admin/getMsg', adminApi.getAllMsg) //获取动态信息
 router.post('/admin/delUser', adminApi.delUser) //删除用户信息

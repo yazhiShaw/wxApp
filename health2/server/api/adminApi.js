@@ -5,15 +5,19 @@ const Message = mongoose.model('Message')
 const Act = mongoose.model('Act')
 const Admin = mongoose.model('Admin')
 var ObjectId = mongoose.Types.ObjectId;
+const jwt = require('jsonwebtoken');
 // 登录
 exports.login = (req, res) => {
     const { username, password } = req.body
     Admin.findOne({ username, password}).then(result => {
-        console.log('sssssss',result)
+        var token = jwt.sign(result.toJSON(), 'app.get(superSecret)', {
+            'expiresIn': 2000 // 设置过期时间
+        });
         if (result) {
             res.json({
                 code: 200,
-                message: '登录成功'
+                message: '登录成功',
+                token: token
             })
         } else {
             res.json({

@@ -59,6 +59,7 @@ export default {
             password: this.loginForm.password
           }).then(res => {
              if (+res.code == 200) {
+               sessionStorage.setItem('token', res.token)
                this.$message.success(res.message);
                this.$router.push("/user");
              } else if (+res.code == 401) {
