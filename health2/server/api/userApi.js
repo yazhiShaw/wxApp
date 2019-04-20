@@ -4,6 +4,7 @@ const request = require('request');
 const config = require('../config')
 const moment = require('moment')
 const User = mongoose.model('User')
+const jwt = require('jsonwebtoken');
 /**
  * 微信根据code回去用户信息
  * @method
@@ -26,12 +27,16 @@ exports.getOpenid = (req, res) => {
                 // gender: userInfo.gender,      //用户性别，默认为1；1是男性，2是女性
                 // avatarUrl: userInfo.avatarUrl,
             }).then(result => {
+                var token = jwt.sign({ openid: data.openid }, 'app.get(superSecret)', {
+                    'expiresIn': 2000 // 设置过期时间
+                });
                 res.json({
                     code: 200,
                     message: '获取openid成功',
                     data: {
                         openid: data.openid,
-                        session_key: data.session_key
+                        session_key: data.session_key,
+                        token: token
                     }
                 })
             }).catch(err => {

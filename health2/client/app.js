@@ -43,11 +43,15 @@ App({
     const currency = {
       openid: this.globalData.openid || wx.getStorageSync('openid')
     }
+    const token = wx.getStorageSync('token')
     return new Promise((resolve, reject) => {
       wx.request({
         url: apiUrl + url,
         data: Object.assign(currency, data),
         method: method,
+        header: {
+          'x-access-token': token
+        },
         success: function (res) {
           if (res.data.code != 200) {
             wx.showModal({
@@ -80,6 +84,7 @@ App({
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           this.http(getOpenidApi, { code: res.code }).then(res => {
             wx.setStorageSync('openid', res.data.openid)
+            wx.setStorageSync('token', res.data.token)
             app.globalData.openid = res.data.openid
             resolve(res.data)
           })

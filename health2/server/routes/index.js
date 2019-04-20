@@ -15,6 +15,8 @@ const publicApi = require('../api/publicApi.js')
 
 // ------- 管理 -------
 router.post('/admin/login', adminApi.login) // 登录
+router.get('/wx/getOpenid', userApi.getOpenid) //获取微信用户信息
+
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token) {
@@ -58,7 +60,6 @@ router.get('/public/getActDetail',publicApi.getActDetail) // 获取活动详情
 router.get('/public/getFocus', publicApi.getFocus) // 我的关注
 
 // ------- 微信登录 -------
-router.get('/wx/getOpenid', userApi.getOpenid) //获取微信用户信息
 router.get('/wx/updateUser', userApi.updateUser) // 更新微信用户信息
 
 // ------- 首页(动态模块) -------
