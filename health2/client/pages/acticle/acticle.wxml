@@ -1,0 +1,64 @@
+<view>
+  <view class='swiper-wrapper' wx:if="{{article.picUrl.length}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{article.picUrl}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{baseUrl +item}}" mode="center" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='acticle'>
+    <view class='user-wrapper' bindtap='toOneArticle' data-openid="{{article.openid}}">
+      <view class="user-info">
+        <image class='userinfo-avatar' src="{{article.avatarUrl}}"></image>
+        <text class='username'>{{article.nickName}}</text>
+      </view>
+      <!-- <view>
+        <button class="focus"> + 关注 </button>
+      </view> -->
+    </view>
+    <view class='acticle-content mt-10'>
+      <view>
+        {{article.content}}
+      </view>
+      <view class='article-footer horizontal-center mt-10'>
+        <view>{{article.createTime}} 发布</view>
+        <!-- <view>喜欢 {{article.likes.length}}</view> -->
+        <view class='vertical-center mr-15' bindtap="addLike" data-messageid="{{article._id}}">
+          <van-icon wx:if="{{!article.like}}" name="like-o" class='vertical-center' color="#282828" />
+          <van-icon wx:if="{{article.like}}" name="like" class='vertical-center' color="red" />
+          <text class='small-text ml-5 likeText'>  {{article.likes.length}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <space />
+  <view class='comments' wx:if="{{article.commentCount}}">
+    <view class='comments-title'>全部评论 （{{article.commentCount}}）</view>
+    <!-- 评论区，左边是用户头像，右边是评论内容 -->
+    <view class='comment-item mt-10' wx:for="{{article.comment}}" wx:key="{{index}}" data-commentid="{{item._id}}">
+      <!-- 用户头像 -->
+      <view bindtap='toOneArticle' data-openid="{{item.openid}}">
+        <image class='userinfo-avatar' src="{{item.commentAvatarUrl}}"></image>
+      </view>
+      <!-- 评论内容 -->
+      <view class='comment-content'>
+        <!-- 用户名 -->
+        <view class='comment-username' bindtap='toOneArticle' data-openid="{{item.openid}}">{{item.commentNickName}}</view>
+        <!-- 评论内容 -->
+        <view>{{item.content}}</view>
+        <!-- 评论时间 -->
+        <view class='comment-date'>{{item.createTime}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='comments' wx:elif="{{!article.commentCount}}">
+    <text class='comments-title'>暂无评论</text>
+    <image src="{{noneImg}}"></image>
+  </view>
+  <view class="sendmessage">
+    <input class="message" bindinput="contentInput" type="text" value="{{content}}"></input>
+    <button class="send" bindtap="addComment">发布</button>
+  </view>
+</view>

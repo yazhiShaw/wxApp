@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-button": "../../lib/vant/button/index",
+    "van-search": "../../lib/vant/search/index",
+    "van-dialog": "../../lib/vant/dialog/index",
+    "van-tabs": "../../lib/vant/tabs/index",
+    "van-tab": "../../lib/vant/tab/index",
+    "van-icon": "../../lib/vant/icon/index",
+    "articleItem": "../../components/articleItem/articleItem"
+  },
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,18 @@
+<view class='my-acticle'>
+  <view class='user-wrapper'>
+    <view class="user-info">
+      <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}"></image>
+      <view class='userinfo-msg'>
+        <view>{{userInfo.nickName}}</view>
+        <view class='fs-12'>1关注 {{total}}文章</view>
+      </view>
+      <!-- <view wx:if="{{article.focus != 0}}"> -->
+        <!-- 0 是代表自己 1是代表别人已关注 2是未关注 -->
+        <!-- <button class="focus" wx:if="{{focus == 1}}" bindtap='toFocus' data-friendid="{{userInfo.openid}}" data-focus="{{true}}"> 已关注 </button>
+        <button class="focus" wx:if="{{focus == 2}}" bindtap='toFocus' data-friendid="{{userInfo.openid}}" data-focus="{{false}}"> + 关注 </button>
+      </view> -->
+    </view>
+  </view>
+  <space />
+  <articleItem article="{{article}}" />
+</view>

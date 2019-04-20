@@ -1,0 +1,8 @@
+<view class='mask-wrapper'>
+    <view class='mask-content'>
+      <image class='userinfo-avatar' src="../../images/user-unlogin.png"></image>
+      <view class='fs-14 mt-15'>欢迎您来到佛系养生club小程序</view>
+      <view class='fs-14 mt-15'>您未同意授权，请允许授权</view>
+      <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class='user-btn mt-15'>微信授权</button>
+    </view>
+</view>

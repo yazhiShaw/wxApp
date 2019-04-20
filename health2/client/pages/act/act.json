@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-tabs": "../../lib/vant/tabs/index",
+    "van-tab": "../../lib/vant/tab/index",
+    "actItem": "../../components/actItem/actItem"
+  },
+  "enablePullDownRefresh": true
+}

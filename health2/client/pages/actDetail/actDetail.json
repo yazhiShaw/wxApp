@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-cell": "../../lib/vant/cell/index",
+    "van-popup": "../../lib/vant/popup/index"
+  }
+}

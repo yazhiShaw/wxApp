@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/publish/publish",
+    "pages/my/my",
+    "pages/acticle/acticle",
+    "pages/addAct/addAct",
+    "pages/act/act",
+    "pages/actDetail/actDetail",
+    "pages/myCollect/myCollect",
+    "pages/allArticle/allArticle",
+    "pages/myFocus/myFocus",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "佛系养生club",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home-default.png",
+        "selectedIconPath": "images/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "iconPath": "images/publish-default.png",
+        "selectedIconPath": "images/publish-active.png",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "images/my-default.png",
+        "selectedIconPath": "images/my-active.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

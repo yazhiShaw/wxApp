@@ -1,0 +1,3 @@
+<view>
+  <articleItem article="{{article}}"/>
+</view>

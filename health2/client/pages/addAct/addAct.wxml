@@ -1,0 +1,30 @@
+<view class="container">
+  <view>
+    <van-cell-group>
+      <van-field value="{{ actTitle }}" required clearable label="活动主题" placeholder="请输入活动主题" bind:change="titleInput" />
+      <van-field value="{{ actContent }}" label="活动内容" type="textarea" placeholder="请输入活动内容" autosize border="{{ false }}" bind:change="contentInput" />
+      <van-field value="{{ actTime }}" required clearable label="活动开始时间" placeholder="请输入活动开始时间" bind:focus="pop" />
+      <van-popup show="{{ show }}" position="bottom" overlay="{{ true }}" bind:close="onClose">
+        <van-datetime-picker type="datetime" min-date="{{ minDate }}" max-date="{{ maxDate }}" bind:input="onInput" bind:cancel="onClose" bind:confirm="onComfirm" />
+      </van-popup>
+      <van-field value="{{ actPlace }}" required clearable label="活动地点" placeholder="请输入活动地点" bind:change="placeInput" />
+      <van-field value="{{ name }}" required clearable label="活动发起人" placeholder="请输入姓名" bind:change="nameInput" />
+      <van-field value="{{ tel }}" required clearable label="联系方式" placeholder="请输入手机" bind:change="telInput" />
+      <van-field value="{{ Idcard }}" required clearable label="身份证" placeholder="请输入身份证" bind:change="IdcardInput" />
+    </van-cell-group>
+    <view>
+      <button class='add-picture' bindtap="chooseImage">+ 添加群聊二维码图片</button>
+      <view class="question-images">
+        <block wx:for="{{picUrl}}" wx:key="index">
+          <view class="q-image-wrap">
+            <!-- 图片缩略图 -->
+            <image class="q-image" src="{{item}}" mode="widthFix" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+            <!-- 移除图片的按钮 -->
+            <!-- <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view> -->
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class='active-btn' bindtap="addAct">提交审核</view>
+</view>

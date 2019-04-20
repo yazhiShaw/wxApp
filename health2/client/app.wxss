@@ -1,0 +1,40 @@
+/**app.wxss**/
+page {
+  background: #fff;
+  color: #282828;
+  height: 100%;
+}
+button{
+  padding: 0;
+  background: transparent;
+}
+button::after{
+  border: none;
+}
+.vertical-center{
+  display: flex;
+  align-items: center;
+}
+.horizontal-center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mr-15{
+  margin-right: 30rpx;
+}
+.mt-10{
+  margin-top: 20rpx;
+}
+.mb-10{
+  margin-bottom: 20rpx;
+}
+.mt-15{
+  margin-top: 30rpx;
+}
+.fs-14{
+  font-size: 28rpx;
+}
+.fw-700{
+  font-weight: 700;
+}

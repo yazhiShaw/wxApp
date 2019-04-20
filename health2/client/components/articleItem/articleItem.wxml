@@ -1,0 +1,55 @@
+<view class='acticle-item' wx:for="{{article}}" wx:key="{{index}}" wx:if="{{article.length}}">
+  <view class='user-wrapper'>
+    <view class="user-info" bindtap='toOneArticle' data-openid="{{item.openid}}">
+      <image class='userinfo-avatar' src="{{item.avatarUrl}}"></image>
+      <view class='horizontal-left'>
+        <text class='fw-700'>{{item.nickName}}</text>
+        <view class='createTime'>{{item.createTime}}</view>
+      </view>
+    </view>
+    <view>
+      <!-- 0 是代表自己 1是代表别人已关注 2是未关注 -->
+      <button class="focus" wx:if="{{item.focus == 0}}" bindtap='toDel' data-messageid="{{item._id}}"> 删除 </button>
+      <button class="focus" wx:if="{{item.focus == 1}}" bindtap='toFocus' data-friendid="{{item.openid}}"  data-nickname="{{item.nickName}}"  data-avatarurl="{{item.avatarUrl}}" data-focus="{{true}}"> 已关注 </button>
+      <button class="focus" wx:if="{{item.focus == 2}}" bindtap='toFocus' data-friendid="{{item.openid}}"  data-nickName="{{item.nickName}}"  data-avatarUrl="{{item.avatarUrl}}" data-focus="{{false}}"> + 关注 </button>
+    </view>
+  </view>
+  <view class='acticle-simple'>
+    <view class='acticle-content-ellipsis' bindtap='toActicleDetail' data-messageid="{{item._id}}">{{item.content}}</view>
+    <view class="question-images">
+      <block wx:for="{{item.picUrl}}" wx:for-item="picUrl" wx:for-index="idx" wx:key="idx">
+        <view class='q-image-wrap'>
+          <image class='q-image' mode="center" src="{{baseUrl + picUrl}}" bindtap="toPreviewImage" data-src="{{baseUrl + picUrl}}" wx:if="{{item.picUrl.length}}"></image>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='classify' bindtap="chooseTab" data-navid='{{item.navId}}' wx:if="{{navId != item.navId}}">
+    # {{navName[item.navId]}}
+  </view>
+  <view class='foot-wrapper'>
+    <view class='foot-left'>
+      <view class='vertical-center mr-15' bindtap="addLike" data-messageid="{{item._id}}">
+        <van-icon wx:if="{{!item.like}}" name="like-o" class='vertical-center' color="#282828" />
+        <van-icon wx:if="{{item.like}}" name="like" class='vertical-center' color="red" />
+        <text class='small-text ml-5'>{{item.likes.length}}</text>
+      </view>
+      <view class='vertical-center' bindtap='toActicleDetail' data-messageid="{{item._id}}">
+        <van-icon name="comment-o" class='vertical-center' color="#282828" />
+        <text class='small-text ml-5'>{{item.commentCount}}</text>
+      </view>
+    </view>
+    <view>
+      <view class='vertical-center' bindtap='addCollect' data-messageid="{{item._id}}" data-collect="{{item.collect}}">
+        <van-icon wx:if="{{!item.collect}}" name="star-o" class='vertical-center' color="#282828" />
+        <van-icon wx:if="{{item.collect}}" name="star" class='vertical-center' color="red" />
+        <text class='small-text ml-5'> 收藏 </text>
+      </view>
+    </view>
+  </view>
+  <space color="white" />
+</view>
+<view wx:if="{{!article.length}}" class='horizontal-center'>
+  <image src='{{noneImg}}'></image>
+  <text>暂无数据</text>
+</view>

@@ -1,0 +1,276 @@
+const moment = require('moment')
+const fs = require('fs')
+const path = require('path')
+const uuid = require('uuid')
+const mongoose = require('../mongoose')
+const Message = mongoose.model('Message')
+const Comment = mongoose.model('Comment')
+const User = mongoose.model('User')
+const Act = mongoose.model('Act')
+// const Like = mongoose.model('Like')
+var multiparty = require('multiparty');
+var ObjectId = mongoose.Types.ObjectId;
+// 储存上传图片的数组
+let picUrl = []
+var i = 0;
+// 发布动态
+exports.addMsg = (req, res) => {
+    // content 内容   picUrl 照片   navId 所属类别编号  openid  userName  avatarUrl
+    const { content, navId = 0, avatarUrl, nickName, openid } = req.body
+    let data = {
+        content,
+        navId,
+        avatarUrl,
+        nickName,
+        openid,
+        picUrl,
+        createTime: moment().format('YYYY-MM-DD HH:mm:ss')
+    }
+    // console.log(data)
+    // picUrl = [] 置空释放上传照片的数组
+    picUrl = []
+    Message.createAsync(data)
+        .then(result => {
+            res.json({
+                code: 200,
+                message: '添加成功',
+                data: result
+            })
+        })
+        .catch(err => {
+            res.json({
+                code: -200,
+                message: 'error'
+        })
+      })
+}
+// 上传图片
+exports.addPic = (req, res) => {
+	console.log(i++);
+    const form = new multiparty.Form();
+    form.uploadDir = './file/images'
+    form.parse(req, function (err, flields, files) {
+        if (err) {
+            console.log(err);
+        } else {
+            const extname = path.extname(files.file[0].originalFilename);
+            const oldpath = path.normalize(files.file[0].path);
+            const nameID = (uuid.v4()).replace(/\-/g, '');
+            let newfilename = nameID + extname;
+            var newpath = './file/images/' + newfilename;
+            // //改名
+            fs.rename(oldpath, newpath, function (err) {
+                if (err) {
+                    throw err;
+                } else {
+                    picUrl.push(newfilename)
+                    console.log(picUrl,'eee')
+                    res.json({
+                        code: 200,
+                        message: 'upload success'
+                    })
+                }
+            })
+        }
+    })
+
+}
+// 添加评论
+exports.addComment = (req, res) => {
+    // content 评论内容   picUrl 照片   navId 所属类别编号  openid  userName  avatarUrl
+    const { content, commentNickName, commentAvatarUrl, toCommentId = -1, openid, messageId } = req.body
+    let data = {
+        content,
+        commentNickName,
+        commentAvatarUrl,
+        toCommentId,
+        openid,
+        createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+        messageId
+    }
+    Promise.all([
+        Comment.createAsync(data),
+        Message.findOne({ _id: ObjectId(messageId) }),
+    ]).then(result => {
+        Message.updateAsync(
+            { _id: ObjectId(messageId) },
+            { commentCount: result[1].commentCount + 1 },
+            { new: true })
+            .then(msg => {
+                res.json({
+                    code: 200,
+                    message: 'success',
+                    data: result[0],
+                })
+            })
+    }).catch(err => {
+        res.json({
+            code: -200,
+            message: err.toString()
+        })
+    })
+}
+// 点赞和取消点赞
+exports.addLike = (req, res) => {
+    const { openid, messageId } = req.body
+    Message.findOne({ _id: ObjectId(messageId) }).then(result => {
+        let index = result.likes.indexOf(openid)
+        let like = false
+        if (index != -1) { // 取消点赞
+            result.likes.splice(index, 1)
+            like = false
+        } else {  // 点赞
+            result.likes.push(openid)
+            like = true
+        }
+        Message.updateAsync(
+            { _id: ObjectId(messageId) },
+            { likes: result.likes, like },
+            { new: true }
+        ).then(msg => {
+            res.json({
+                code: 200,
+                message: '点赞成功',
+                data: msg,
+            })
+        }).catch(err => {
+            res.json({
+                code: -200,
+                message: err.toString()
+            })
+        })
+    }).catch(err => {
+        res.json({
+            code: -200,
+            message: err.toString()
+        })
+    })
+}
+// 收藏和取消收藏
+exports.addMyCollect = (req, res) => {
+    const { openid, messageId } = req.body
+    Message.findOne({ _id: ObjectId(messageId) }).then(result => {
+        let index = result.collects.indexOf(openid)
+        let collect = false
+        if (index != -1) { // 取消收藏
+            result.collects.splice(index, 1)
+            collect = false
+        } else {  // 收藏
+            result.collects.push(openid)
+            collect = true
+        }
+        Message.updateAsync(
+            { _id: ObjectId(messageId) },
+            { collects: result.collects, collect },
+            { new: true }
+        ).then(msg => {
+            res.json({
+                code: 200,
+                message: '收藏成功',
+                data: msg,
+            })
+        }).catch(err => {
+            res.json({
+                code: -200,
+                message: err.toString()
+            })
+        })
+    }).catch(err => {
+        res.json({
+            code: -200,
+            message: err.toString()
+        })
+    })
+}
+// 关注和取消关注
+exports.addFocus = (req, res) => {
+    const { openid, friendId } = req.body
+    User.findOne({ openid }).then(result => {
+        let index = result.friendId.indexOf(friendId)
+        if (index != -1) { // 取消关注
+            result.friendId.splice(index, 1)
+        } else {  // 关注
+            result.friendId.push(friendId)
+        }
+        User.updateOneAsync({ openid }, { friendId: result.friendId }, { new: true }).then(user => {
+            res.json({
+                code: 200,
+                message: '关注',
+                data: user,
+            })
+        }).catch(err => {
+            res.json({
+                code: -200,
+                message: err.toString()
+            })
+        })
+    })
+}
+// 添加活动
+exports.addMyAct = (req, res) => {
+	console.log(11111111111111111111111111111111)
+    const { actTitle, actContent, actTime, actPlace, openid, nickName, name, avatarUrl, tel, Idcard } = req.body
+    let data = {
+        actTitle,
+        actContent,
+        createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+        actTime,
+        actPlace,
+        openid,
+        nickName,
+        name,
+        tel,
+        avatarUrl,
+        Idcard,
+        actPic: picUrl
+    }
+    picUrl = []
+    Act.createAsync(data)
+        .then(result => {
+            res.json({
+                code: 200,
+                message: '添加成功',
+                data: result
+            })
+        })
+        .catch(err => {
+            res.json({
+                code: -200,
+                message: err.toString()
+            })
+        })
+}
+// 更新个性签名
+exports.updateSign = (req, res) => {
+    const { sign, openid } = req.body
+    User.findOneAndUpdateAsync({ openid }, {
+        sign
+    }, { new: true }).then(result => {
+        console.log(result)
+        res.json({
+            code: 200,
+            message: '获取成功',
+            data: result
+        })
+    }).catch(err => {
+        res.json({
+            code: -200,
+            message: err.toString()
+        })
+    })
+}
+
+exports.delMsg = (req, res) => {
+    const { messageId, openid } = req.body
+    Message.remove({ _id: ObjectId(messageId) }).then(result => {
+        res.json({
+            code: 200,
+            message: 'delete message success'
+        })
+    }).catch(err => {
+        res.json({
+            code: -200,
+            message: err.toString()
+        })
+    })
+}

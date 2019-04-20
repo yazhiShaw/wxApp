@@ -1,0 +1,32 @@
+<view class='acticle'>
+  <view class='user-wrapper'>
+    <view class="user-info">
+      <image class='userinfo-avatar' src="{{act.avatarUrl}}"></image>
+      <text class='userName'>{{act.nickName}}</text>
+    </view>
+    <view>
+      <button class="focus" wx:if="{{navId == 0 && act.checkFlag == 1 && (actStamp > nowStamp)}}" bindtap='join'> + 我要参加 </button>
+      <button class="focus" wx:if="{{navId == 0 && (actStamp <= nowStamp)}}"> 活动已截止报名</button>
+    </view>
+  </view>
+  <view class='acticle-content mt-10'>
+    <van-cell title="活动主题：" value="{{act.actTitle}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <van-cell title="活动描述：" value="{{act.actContent}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <van-cell title="发起人：" value="{{act.name}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <van-cell title="联系方式：" value="{{act.tel}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <van-cell title="开始时间：" value="{{act.actTime}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <van-cell title="活动地点：" value="{{act.actPlace}}" icon="location-o" value-class="color-black" title-width="140rpx" />
+    <!-- <van-cell title="活动报名群聊二维码：" icon="location-o" title-width="300rpx">
+      <image src="{{baseUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon"></image>
+    </van-cell> -->
+    <view class='article-footer mt-10'>
+      <view>{{act.createTime}} 发布</view>
+    </view>
+  </view>
+</view>
+<view class='mask-wrapper' wx-if="{{ show }}" bindtap='onclose'>
+  <view class='mask-content'>
+    <view class='text'>扫码进入活动群聊：</view>
+    <image src="{{baseUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon" class='mask-image'></image>
+  </view>
+</view>

@@ -1,0 +1,17 @@
+<view class='acticle-item' wx:for="{{act}}" wx:key="{{index}}" wx:if="{{item.checkFlag==1 || navId === 1}}" bindtap='toActDetail' data-actid="{{item._id}}">
+  <view class='acticle-simple'>
+    <view class='acticle-content-ellipsis'>{{item.actTitle}}</view>
+    <view class='article-footer'>
+      <view>{{item.nickName}} 于 {{item.createTime}} 发布 </view>
+      <view class="icon-flag" wx:if="{{navId === 1 && item.checkFlag === 0}}"> 审核中 </view>
+      <view class="icon-flag" wx:if="{{navId === 1 && item.checkFlag === 1}}"> 审核通过 </view>
+      <view class="icon-flag" wx:if="{{navId === 1 && item.checkFlag === 2}}"> 审核不通过 </view>
+    </view>
+  </view>
+</view>
+<!-- checkFlag 0 审核未过 -->
+  <!-- 显示无数据条件：1.已通过审核 -->
+  <view class='horizontal-center' wx:if="{{act.length == 0}}">
+    <image src='{{noneImg}}'></image>
+    <text>暂无数据</text>
+  </view>

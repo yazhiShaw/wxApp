@@ -1,0 +1,104 @@
+.user-wrapper{
+  padding: 30rpx 15rpx 20rpx 15rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction:column;
+}
+.user-info{
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 500;
+  padding-bottom: 20rpx;
+  width: 100%;
+}
+.icon{
+  position:relative;
+  top: 5rpx;
+}
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.userinfo-msg{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.fs-12{
+  font-size: 24rpx;
+}
+.input-wrapper{
+  display: flex;
+  align-items: center;
+}
+.input {
+  flex-grow: 1;
+  border: 1px solid #eee;
+  border-radius: 10rpx;
+  padding: 0 14rpx;
+  border: none;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.submit{
+  margin-right: 16rpx;
+  border: 1px solid #eee;
+  line-height: 58rpx;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+}
+.active-btn{
+  width: 240rpx;
+  float: right;
+  border: 1px solid #1296db;
+  color: #1296db;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 10rpx 16rpx;
+}
+.entry{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 20rpx;
+}
+.entry-btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #1296db;
+  width: 100rpx;
+  height: 100rpx;
+  background: #fff;
+  margin: 0;
+  margin-right: 30rpx;
+  font-size: 26rpx;
+}
+.image{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 10rpx;
+}
+.line{
+  line-height: 1;
+}
+.myName {
+  margin-right: 20rpx;
+}
+.signText {
+  display:inline-block;
+  max-width: 250rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mySignText {
+  display: flex;
+  align-items: center;
+}

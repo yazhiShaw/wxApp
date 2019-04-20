@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+<form action="/">
+  <van-search
+    v-model="value"
+    placeholder="请输入搜索关键词"
+    show-action
+    search="onSearch"
+  />
+</form>
+  </view>
+  <view>
+    <van-tabs swipeable sticky bind:change="chooseTab" active="{{ active }}">
+      <van-tab wx:for="{{navName}}" title="{{item}}" wx:key="{{index}}">
+        <articleItem article="{{article}}" navId="{{navId}}" bind:myevent="onMyEvent"/>
+      </van-tab>
+    </van-tabs>
+  </view>
+</view>

@@ -1,0 +1,63 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.0.4",
+	"appid": "wx526935be9a6a8600",
+	"projectname": "client",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "评论",
+					"pathName": "pages/acticle/acticle",
+					"query": "messageId=5c96ff19a2fc691fb431ac8e",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "活动",
+					"pathName": "pages/addAct/addAct",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "活动相亲",
+					"pathName": "pages/my/my",
+					"query": "penid=oZ8G94nd3qdQfNeS7HDOg5Bo84dE&actId=5c98a735d97c6b1d90164f32",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,29 @@
+<view class='container'>
+  <view class='textarea'>
+    <van-cell-group>
+      <van-field value="{{ content }}" type="textarea" placeholder="输入您的养生之道" autosize border="{{ false }}" bind:change="contentInput" />
+    </van-cell-group>
+    <view class='add-nav'> # 选择分类</view>
+    
+  </view>
+  <view class='nav'>
+    <view class="{{navId == 1 ? 'nav-choose-item' : 'nav-item'}}" bindtap="chooseNavId" data-navid='1'>佛系健康</view>
+    <view class="{{navId == 2 ? 'nav-choose-item' : 'nav-item'}}" bindtap="chooseNavId" data-navid='2'>佛系美容</view>
+    <view class="{{navId == 3 ? 'nav-choose-item' : 'nav-item'}}" bindtap="chooseNavId" data-navid='3'>佛系美食</view>
+    <view class="{{navId == 4 ? 'nav-choose-item' : 'nav-item'}}" bindtap="chooseNavId" data-navid='4'>佛系茶道</view>
+  </view>
+  <view class='horizontal-center'>
+    <button class='add-picture' bindtap="chooseImage"> + 添加图片</button>
+    <button class='add-picture' bindtap="publish">发布</button>
+  </view>
+  <view class="question-images">
+    <block wx:for="{{picUrl}}" wx:key="index">
+      <view class="q-image-wrap">
+        <!-- 图片缩略图  -->
+        <image class="q-image" src="{{item}}" mode="center" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+        <!-- 移除图片的按钮  -->
+        <!-- <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view> -->
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+/* pages/allArticle/allArticle.wxss */
+.user-wrapper{
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.user-info{
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 500;
+  width:100%;
+}
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-msg{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.fs-12{
+  font-size: 24rpx;
+}
+.focus {
+  padding: 10rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  color: #1296db;
+}
+
+.focus::after {
+  border: none;
+  background: none;
+}

@@ -1,0 +1,41 @@
+<view class="container">
+  <view class='user-wrapper'>
+    <view class="user-info">
+      <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}"></image>
+      <view class='userinfo-msg'>
+        <view>
+          <text class='myName'>{{userInfo.nickName}}</text>
+          <text class='fs-12'>{{userInfo.friendId.length}}关注 {{total}}文章</text>
+          <button class='active-btn' bindtap="addAct"> + 发起线下活动</button>
+        </view>
+        <view class='fs-12 mySignText' wx:if="{{!input}}">
+          简介：<text class='signText'>{{userInfo.sign}}</text>
+          <van-icon name="edit" color="#282828" size='40rpx' class='icon' bindtap="edit" />
+        </view>
+        <view class='fs-12 input-wrapper' wx:if="{{input}}">
+            <input class='input' value="{{sign}}" bindblur='submit' bindinput='signInput'></input>
+            <!-- <button class='submit' bindtap='submit'>提交</button> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <space />
+  <view class='entry'>
+    <button class='entry-btn' bindtap="getAct">
+      <image class='image' src='../../images/act.png' mode='widthFix' lazy-load></image>
+      <text class='line'>活动</text>
+    </button>
+    <button class='entry-btn collect' bindtap="getMyCollect">
+      <image class='image' src='../../images/collect.png' mode='widthFix' lazy-load></image>
+      <text class='line'>收藏</text>
+    </button>
+    <!-- <button class='entry-btn collect' bindtap="getFocus">
+      <image class='image' src='../../images/collect.png' mode='widthFix' lazy-load></image>
+      <text class='line'>关注</text>
+    </button> -->
+  </view>
+  <space />
+  <view class='my-acticle'>
+    <articleItem article="{{article}}"/>
+  </view>
+</view>

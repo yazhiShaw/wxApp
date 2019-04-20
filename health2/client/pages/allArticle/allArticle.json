@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "articleItem": "../../components/articleItem/articleItem",
+    "space": "../../components/space/space"
+  }
+}

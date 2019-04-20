@@ -1,0 +1,7 @@
+<view>
+    <van-tabs swipeable sticky bind:change="chooseTab" active="{{ active }}">
+      <van-tab wx:for="{{navName}}" title="{{item}}" wx:key="{{index}}">
+        <actItem act="{{act}}" navId="{{navId}}"/>
+      </van-tab>
+    </van-tabs>
+  </view>

@@ -1,0 +1,55 @@
+/* pages/addAct/addAct.wxss */
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.active-btn {
+  position: absolute;
+  right: 20rpx;
+  bottom: 30rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  padding: 10rpx 16rpx;
+  text-align: center;
+  width: 200rpx;
+  height: 40rpx;
+  background: #1296db;
+  color: #fff;
+  border-radius: 10rpx;
+}
+
+.question-images {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  overflow: hidden;
+  padding: 10rpx;
+}
+
+.q-image-wrap {
+  width: 32%;
+  margin-top: 1.33%;
+}
+
+.q-image {
+  width: 100%;
+}
+
+.add-picture {
+  display: inline-block;
+  /* width: 300rpx; *//* height: 100rpx; */
+  border: 1px solid #1296db;
+  color: #1296db;
+  margin: 30rpx 20rpx;
+  padding: 16rpx 20rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}

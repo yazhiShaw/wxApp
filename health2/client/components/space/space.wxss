@@ -1,0 +1,10 @@
+.space{
+  width: 100%;
+  height: 30rpx;
+}
+.white{
+  background: #fff;
+}
+.gray{
+  background: #eee;
+}
