@@ -1,20 +1,21 @@
 //index.js
 const app = getApp()
-const { getMsgApi, updateUserApi } = require('../../api/api.js')
+const { getMsgApi, updateUserApi, searchMsgApi } = require('../../api/api.js')
 Page({
   data: {
     showMask: false,
     userInfo: {
       avatarUrl: '../../images/user-unlogin.png'
     },
-    article: {},
+    article: [],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     navId: 0,
     navName: ['养生推荐', '佛系健康', '佛系美容', '佛系美食', '佛系茶道'],
     active: 0,
     page: 1,
-    hasNext: 0
+    hasNext: 0,
+    content: '' // 搜索动态关键字
   },
   onLoad: function () {
     let that = this
@@ -56,7 +57,7 @@ Page({
       app.getOpenid(that.data.userInfo).then(() => {
         app.http(getMsgApi, { navId: 0 }).then(res => {
           that.setData({
-            article: that.data.article.concat(res.data.list),
+            article: res.data.list,
             active: 0,
             page: res.data.page,
             hasNext: res.data.hasNext,
@@ -113,9 +114,23 @@ Page({
       })
     })
   },
+  searchInput: function(e){
+    this.setData({
+      content: e.detail
+    })
+  },
   onSearch: function(e) {
-    console.log(1)
-    debugger
+    let that = this
+    let content = that.data.content
+    app.http(searchMsgApi, {content}).then(res => {
+      this.setData({
+        article: res.data.list,
+        navId: 0,
+        active: 0,
+        page: res.data.page,
+        hasNext: res.data.hasNext,
+      })
+    })
   },
   onMyEvent: function (e) {
     let that = this
@@ -125,7 +140,9 @@ Page({
     })
     app.http(getMsgApi, { navId: that.data.navId }).then(res => {
       that.setData({
-        article: res.data.list
+        article: res.data.list,
+        page: res.data.page,
+        hasNext: res.data.hasNext,
       })
     })
   },

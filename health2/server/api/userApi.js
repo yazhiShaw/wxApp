@@ -28,7 +28,7 @@ exports.getOpenid = (req, res) => {
                 // avatarUrl: userInfo.avatarUrl,
             }).then(result => {
                 var token = jwt.sign({ openid: data.openid }, 'app.get(superSecret)', {
-                    'expiresIn': 2000 // 设置过期时间
+                    'expiresIn': 60 * 60 * 24 // 设置过期时间
                 });
                 res.json({
                     code: 200,

@@ -18,4 +18,5 @@ module.exports = {
   getFocusApi: '/api/public/getFocus',
   updateSignApi: '/api/index/updateSign',
   delMsg: '/api/index/delMsg',
+  searchMsgApi: '/api/admin/getMsg'
 }
