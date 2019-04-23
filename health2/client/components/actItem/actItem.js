@@ -15,7 +15,6 @@ Component({
     }
   },
   data: {
-    baseUrl: 'http://localhost:8082/file/images/',
     noneImg: "../../images/none.jpg",
   },
   onLoad: function() {

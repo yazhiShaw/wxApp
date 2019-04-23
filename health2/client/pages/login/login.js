@@ -1,5 +1,6 @@
 // pages/login/login.js
 const app = getApp()
+const { updateUserApi } = require('../../api/api.js')
 Page({
 
   /**
@@ -8,74 +9,38 @@ Page({
   data: {
 
   },
-
   // 获取用户头像
   onGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo;
-      app.globalData.onLoadAgain = true
-      this.setData({
-        userInfo: e.detail.userInfo,
-      })
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+      this.checkToken();
     }
   },
-  
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  // 检查token有效期
+  checkToken: function () {
+    let that = this;
+    let token = wx.getStorageSync('token');
+    if (!token) { // 没有token去登录
+      app.getOpenid();
+    } else { // 有token保存用户信息
+      that.saveUserInfo();
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  saveUserInfo: function(){
+    app.http(updateUserApi, { userInfo: app.globalData.userInfo }).then(res => {
+      if ((res.code == 401)) {
+        wx.removeStorageSync('token')
+        app.getOpenid()
+      } else if (res.code == 200) {
+        wx.switchTab({
+          url: '/pages/index/index',
+        });
+      } else {
+        wx.showModal({
+          title: 'Sorry',
+          content: '同步用户信息出错~',
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -8,7 +8,7 @@ Page({
    */
   data: {
     act: '',
-    baseUrl: 'http://localhost:8082/file/images/',
+    basePicUrl: app.globalData.basePicUrl,
     show: false,
     navId: 0,
     nowStamp: '',

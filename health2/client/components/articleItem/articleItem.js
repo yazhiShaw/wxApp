@@ -30,7 +30,7 @@ Component({
   },
   data: {
     // tabs: [' 标签1', '标签2']
-    baseUrl: 'http://localhost:8082/file/images/',
+    basePicUrl: app.globalData.basePicUrl,
     like: false,
     noneImg: "../../images/none.jpg",
     navName: ['养生推荐', '佛系健康', '佛系美容', '佛系美食', '佛系茶道'],

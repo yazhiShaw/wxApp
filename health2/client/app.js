@@ -20,10 +20,6 @@ App({
               this.globalData.openid = wx.getStorageSync('openid') || null
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
-              const { updateUserApi } = require('./api/api.js')
-              this.http(updateUserApi, { userInfo: res.userInfo} ).then(res => {
-                console.log(res)
-              })
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
@@ -53,7 +49,12 @@ App({
           'x-access-token': token
         },
         success: function (res) {
-          if (res.data.code != 200) {
+          if(res.data.code == 401){
+            wx.removeStorageSync('token');
+            wx.redirectTo({
+              url: '/pages/login/login',
+            })
+          }else if (res.data.code != 200) {
             wx.showModal({
               title: '提示',
               content: res.data.message,
@@ -98,6 +99,8 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
-    baseUrl: 'http://localhost:8082',
+    // baseUrl: 'http://localhost:8082',
+    baseUrl: 'http://47.106.205.195:8082',
+    basePicUrl: 'http://47.106.205.195:8082/file/images/'
   }
 })

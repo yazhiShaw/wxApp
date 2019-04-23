@@ -17,7 +17,7 @@
     <van-cell title="开始时间：" value="{{act.actTime}}" icon="location-o" value-class="color-black" title-width="140rpx" />
     <van-cell title="活动地点：" value="{{act.actPlace}}" icon="location-o" value-class="color-black" title-width="140rpx" />
     <!-- <van-cell title="活动报名群聊二维码：" icon="location-o" title-width="300rpx">
-      <image src="{{baseUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon"></image>
+      <image src="{{basePicUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon"></image>
     </van-cell> -->
     <view class='article-footer mt-10'>
       <view>{{act.createTime}} 发布</view>
@@ -27,6 +27,6 @@
 <view class='mask-wrapper' wx-if="{{ show }}" bindtap='onclose'>
   <view class='mask-content'>
     <view class='text'>扫码进入活动群聊：</view>
-    <image src="{{baseUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon" class='mask-image'></image>
+    <image src="{{basePicUrl + act.actPic[0]}}" mode="widthFix" slot="right-icon" class='mask-image'></image>
   </view>
 </view>

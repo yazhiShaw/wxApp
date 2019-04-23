@@ -27,7 +27,7 @@ Page({
     content: '',
     article: {},
     userInfo: '',
-    baseUrl: "http://localhost:8082/file/images/",
+    basePicUrl: app.globalData.basePicUrl,
     noneImg: "../../images/none.jpg"
   },
   changeProperty: function(e) {

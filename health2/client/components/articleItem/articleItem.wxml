@@ -19,7 +19,7 @@
     <view class="question-images">
       <block wx:for="{{item.picUrl}}" wx:for-item="picUrl" wx:for-index="idx" wx:key="idx">
         <view class='q-image-wrap'>
-          <image class='q-image' mode="center" src="{{baseUrl + picUrl}}" bindtap="toPreviewImage" data-src="{{baseUrl + picUrl}}" wx:if="{{item.picUrl.length}}"></image>
+          <image class='q-image' mode="center" src="{{basePicUrl + picUrl}}" bindtap="toPreviewImage" data-src="{{basePicUrl + picUrl}}" wx:if="{{item.picUrl.length}}"></image>
         </view>
       </block>
     </view>
