@@ -59,12 +59,16 @@ Page({
   },
   upload() {
     const picUrl = this.data.picUrl
+    const token = wx.getStorageSync('token')
     return new Promise((resolve, reject) => {
       for (let i = 0; i < picUrl.length; i++) {
         wx.uploadFile({
-          url: app.globalData.baseUrl + addPicApi,                  //服务器接口地址
+          url: app.globalData.baseUrl + addPicApi, //服务器接口地址
           filePath: picUrl[i],
           name: 'file',
+          header: {
+            'x-access-token': token
+          },
           success: res => {
             // console.log('第' + ｉ + '[uploadFile上传文件] 成功：', res)
             resolve(res.data)

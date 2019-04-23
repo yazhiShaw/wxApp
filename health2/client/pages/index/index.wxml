@@ -1,14 +1,17 @@
 <!--index.wxml-->
 <view class="container">
   <view>
-<form action="/">
+<view>
   <van-search
     v-model="value"
     placeholder="请输入搜索关键词"
-    show-action
+    use-action-slot
+    bind:change="searchInput"
     bind:search="onSearch"
-  />
-</form>
+  >
+  <view slot="action" bindtap='onSearch'>搜索</view>
+  </van-search>
+</view>
   </view>
   <view>
     <van-tabs swipeable sticky bind:change="chooseTab" active="{{ active }}">
