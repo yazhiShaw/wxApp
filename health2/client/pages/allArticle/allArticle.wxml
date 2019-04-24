@@ -14,5 +14,5 @@
     </view>
   </view>
   <space />
-  <articleItem article="{{article}}" />
+  <articleItem article="{{article}}" isShow="{{false}}"/>
 </view>

@@ -11,6 +11,10 @@ const {
 } = require('../../utils/util.js')
 Component({
   properties: {
+    isShow: {
+      type: Boolean,
+      value: true
+    },
     navId: {
       type: Number,
       value: 0

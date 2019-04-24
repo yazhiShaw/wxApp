@@ -9,3 +9,7 @@
       <view class="focus">已关注</view>
     </view>
 </view>
+<view wx:if="{{!focusList.length}}" class='horizontal-center'>
+  <image src='{{noneImg}}'></image>
+  <text>暂无数据</text>
+</view>

@@ -11,7 +11,7 @@ Page({
     article: '',
     total: 0,
     userInfo: {},
-    focus:0
+    // focus:0
   },
 
   /**
@@ -25,7 +25,7 @@ Page({
         article: res.data.list,
         total: res.data.total,
         userInfo: res.data.userInfo,
-        focus: res.data.focus
+        // focus: res.data.focus
       })
     })
   },
