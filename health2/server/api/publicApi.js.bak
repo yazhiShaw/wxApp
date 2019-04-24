@@ -24,7 +24,7 @@ exports.getMsg = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Message.estimatedDocumentCountAsync({ openid: oneOpenid }),
+            Message.countDocuments({ openid: oneOpenid }),
             User.findOne({ openid: oneOpenid })
         ])
             .then(result => {
@@ -72,7 +72,7 @@ exports.getMsg = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Message.estimatedDocumentCountAsync({ collects: { $in: openid } }),
+            Message.countDocuments({ collects: { $in: openid } }),
             User.findOne({ openid })
         ])
             .then(result => {
@@ -118,7 +118,7 @@ exports.getMsg = (req, res) => {
                     .skip(skip)
                     .limit(limit)
                     .exec(),
-                Message.estimatedDocumentCountAsync(),
+                Message.countDocuments(),
                 User.findOne({ openid })
             ])
                 .then(result => {
@@ -163,7 +163,7 @@ exports.getMsg = (req, res) => {
                     .skip(skip)
                     .limit(limit)
                     .exec(),
-                Message.estimatedDocumentCountAsync({ navId }),
+                Message.countDocuments({ navId }),
                 User.findOne({ openid })
             ])
                 .then(result => {
@@ -240,7 +240,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync(),
+            Act.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -271,7 +271,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync(),
+            Act.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -302,7 +302,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync({ checkFlag: 1 }),
+            Act.countDocuments({ checkFlag: 1 }),
         ])
             .then(result => {
                 const total = result[1]

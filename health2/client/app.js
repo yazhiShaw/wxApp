@@ -100,6 +100,7 @@ App({
     userInfo: null,
     openid: null,
     // baseUrl: 'http://localhost:8082',
+    // basePicUrl: 'http://localhost:8082/file/images/',
     baseUrl: 'http://47.106.205.195:8082',
     basePicUrl: 'http://47.106.205.195:8082/file/images/'
   }

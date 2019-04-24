@@ -7,14 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    focusList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
   },
 
   /**
@@ -29,14 +28,19 @@ Page({
    */
   onShow: function () {
     let that = this
+    // let friendId = that.data.friendId
     app.http(getFocusApi).then(res => {
-      console.log(res)
-      // that.setData({
-        
-      // })
+      that.setData({
+        focusList: res.data
+      })
     })
   },
-
+  toOneArticle: function (e) {
+    const openid = e.currentTarget.dataset.openid
+    wx.navigateTo({
+      url: "/pages/allArticle/allArticle?openid=" + openid,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

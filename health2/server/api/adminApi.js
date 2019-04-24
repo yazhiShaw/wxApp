@@ -80,7 +80,7 @@ exports.getAllUser = (req, res) => {
             .skip(skip)
             .limit(limit)
             .exec(),
-        User.estimatedDocumentCountAsync(),
+        User.countDocuments(),
     ])
         .then(result => {
             const total = result[1]
@@ -154,7 +154,7 @@ exports.getAllMsg = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Message.estimatedDocumentCountAsync(),
+            Message.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -186,7 +186,7 @@ exports.getAllMsg = (req, res) => {
             .skip(skip)
             .limit(limit)
             .exec(),
-        Message.estimatedDocumentCountAsync(),
+        Message.countDocuments(),
     ])
         .then(result => {
             const total = result[1]
@@ -261,7 +261,7 @@ exports.getAllAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync(),
+            Act.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -292,7 +292,7 @@ exports.getAllAct = (req, res) => {
             .skip(skip)
             .limit(limit)
             .exec(),
-        Act.estimatedDocumentCountAsync(),
+        Act.countDocuments(),
     ])
         .then(result => {
             const total = result[1]

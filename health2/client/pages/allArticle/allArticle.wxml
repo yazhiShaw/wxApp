@@ -4,7 +4,7 @@
       <image class='userinfo-avatar' src="{{userInfo.avatarUrl}}"></image>
       <view class='userinfo-msg'>
         <view>{{userInfo.nickName}}</view>
-        <view class='fs-12'>1关注 {{total}}文章</view>
+        <view class='fs-12'>{{userInfo.friendId.length}}关注 {{total}}文章</view>
       </view>
       <!-- <view wx:if="{{article.focus != 0}}"> -->
         <!-- 0 是代表自己 1是代表别人已关注 2是未关注 -->

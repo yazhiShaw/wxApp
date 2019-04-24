@@ -1,6 +1,6 @@
 // pages/my/my.js
 const app = getApp()
-const { addActApi, getMsgApi, getFocusApi, updateSignApi, getUserApi, updateUserApi } = require('../../api/api.js')
+const { addActApi, getMsgApi, updateSignApi, getUserApi, updateUserApi } = require('../../api/api.js')
 
 Page({
 
@@ -91,8 +91,9 @@ Page({
     })
   },
   getFocus: function() {
+    let friendId = 
     wx.navigateTo({
-      url: "/pages/myFocus/myFocus"
+      url: "/pages/myFocus/myFocus?friendId=" + friendId
     })
   },
   /**

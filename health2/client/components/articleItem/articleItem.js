@@ -146,6 +146,23 @@ Component({
     toDel: function (e) {
       let that = this
       const messageId = e.currentTarget.dataset.messageid
+      const pageUrl = getCurrentPageUrl()
+      const oneOpenid = app.globalData.openid || wx.getStorageSync('openid')
+      let data = ''
+      if (pageUrl === 'pages/index/index') {
+        data = {
+          navId: that.data.navId
+        }
+      } else if (pageUrl === 'pages/my/my' || pageUrl === 'pages/allArticle/allArticle') {
+        data = {
+          act: 'findMyActicles',
+          oneOpenid
+        }
+      } else if (pageUrl === 'pages/myCollect/myCollect') {
+        data = {
+          act: 'findMyCollect'
+        }
+      }
       wx.showModal({
         title: '提示',
         content: '确定删除吗？',
@@ -157,7 +174,7 @@ Component({
                   title: '删除成功',
                   duration: 1500
                 })
-                app.http(getMsgApi, { navId: that.data.navId }).then(res => {
+                app.http(getMsgApi, data).then(res => {
                   that.setData({
                     article: res.data.list
                   })

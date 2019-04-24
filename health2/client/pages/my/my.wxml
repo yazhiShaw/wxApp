@@ -29,10 +29,10 @@
       <image class='image' src='../../images/collect.png' mode='widthFix' lazy-load></image>
       <text class='line'>收藏</text>
     </button>
-    <!-- <button class='entry-btn collect' bindtap="getFocus">
+    <button class='entry-btn collect' bindtap="getFocus">
       <image class='image' src='../../images/collect.png' mode='widthFix' lazy-load></image>
       <text class='line'>关注</text>
-    </button> -->
+    </button>
   </view>
   <space />
   <view class='my-acticle'>

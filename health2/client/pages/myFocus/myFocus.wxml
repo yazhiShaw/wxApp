@@ -1,2 +1,11 @@
-<!--pages/myFocus/myFocus.wxml-->
-<text>pages/myFocus/myFocus.wxml</text>
+<view class='padding'>
+  <view class="user-info" wx:for="{{focusList}}" wx:key="{{index}}" bindtap='toOneArticle' data-openid="{{item.openid}}">
+      <image class='userinfo-avatar' src="{{item.avatarUrl}}"></image>
+      <view class='userinfo-msg'>
+        <view>
+          <text class='myName'>{{item.nickName}}</text>
+        </view>
+      </view>
+      <view class="focus">已关注</view>
+    </view>
+</view>

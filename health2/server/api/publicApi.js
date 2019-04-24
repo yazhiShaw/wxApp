@@ -23,11 +23,10 @@ exports.getMsg = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Message.estimatedDocumentCountAsync({ openid: oneOpenid }),
+            Message.countDocuments({ openid: oneOpenid }),
             User.findOne({ openid: oneOpenid })
         ])
             .then(result => {
-                console.log(result[0][0].openid, openid)
                 for (let i = 0; i < result[0].length; i++) {
                     // 如果文章的作者和当前作者相同，那么focus为0
                     if (result[0][i].openid == openid) {
@@ -71,7 +70,7 @@ exports.getMsg = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Message.estimatedDocumentCountAsync({ collects: { $in: openid } }),
+            Message.countDocuments({ collects: { $in: openid } }),
             User.findOne({ openid })
         ])
             .then(result => {
@@ -117,7 +116,7 @@ exports.getMsg = (req, res) => {
                     .skip(skip)
                     .limit(limit)
                     .exec(),
-                Message.estimatedDocumentCountAsync(),
+                Message.countDocuments(),
                 User.findOne({ openid })
             ])
                 .then(result => {
@@ -162,7 +161,7 @@ exports.getMsg = (req, res) => {
                     .skip(skip)
                     .limit(limit)
                     .exec(),
-                Message.estimatedDocumentCountAsync({ navId }),
+                Message.countDocuments({ navId }),
                 User.findOne({ openid })
             ])
                 .then(result => {
@@ -239,7 +238,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync(),
+            Act.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -270,7 +269,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync(),
+            Act.countDocuments(),
         ])
             .then(result => {
                 const total = result[1]
@@ -301,7 +300,7 @@ exports.getAct = (req, res) => {
                 .skip(skip)
                 .limit(limit)
                 .exec(),
-            Act.estimatedDocumentCountAsync({ checkFlag: 1 }),
+            Act.countDocuments({ checkFlag: 1 }),
         ])
             .then(result => {
                 const total = result[1]
@@ -361,11 +360,19 @@ exports.getMyCollects = (req, res) => {
 // 获取我的关注列表
 exports.getFocus = (req, res) => {
     let { openid } = req.query
-    User.findOne({ openid }).then(result => {
-        res.json({
-            code: 200,
-            message: 'success',
-            data: result
+    User.findOne({ openid }).then(user => {
+        let focusId = user.friendId
+        User.find({ openid: { $in: focusId } }).then(result => {
+            res.json({
+                code: 200,
+                message: 'success',
+                data: result
+            })
+        }).catch(err => {
+            res.json({
+                code: -200,
+                message: err.toString()
+            })
         })
     }).catch(err => {
         res.json({
