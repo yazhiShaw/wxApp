@@ -1,15 +1,15 @@
 <view class='padding'>
-  <view class="user-info" wx:for="{{focusList}}" wx:key="{{index}}" bindtap='toOneArticle' data-openid="{{item.openid}}">
-      <image class='userinfo-avatar' src="{{item.avatarUrl}}"></image>
-      <view class='userinfo-msg'>
-        <view>
-          <text class='myName'>{{item.nickName}}</text>
-        </view>
+  <view class='column-center' wx:if="{{focusList.length == 0}}">
+    <image src='{{noneImg}}'></image>
+    <text>暂无关注的人</text>
+  </view>
+  <view class="user-info" wx:for="{{focusList}}" wx:key="{{index}}" >
+    <image class='userinfo-avatar' bindtap='toOneArticle' data-openid="{{item.openid}}" src="{{item.avatarUrl}}"></image>
+    <view class='userinfo-msg' bindtap='toOneArticle' data-openid="{{item.openid}}">
+      <view>
+        <text class='myName'>{{item.nickName}}</text>
       </view>
-      <view class="focus">已关注</view>
     </view>
-</view>
-<view wx:if="{{!focusList.length}}" class='horizontal-center'>
-  <image src='{{noneImg}}'></image>
-  <text>暂无数据</text>
+    <view class="focus" bindtap='toFocus' data-friendid="{{item.openid}}"  data-nickname="{{item.nickName}}"  data-avatarurl="{{item.avatarUrl}}" data-focus="{{true}}">已关注</view>
+  </view>
 </view>
