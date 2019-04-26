@@ -19,36 +19,44 @@ exports.getOpenid = (req, res) => {
     request(urlStr, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let data = JSON.parse(body)
-            User.createAsync({
-                openid: data.openid,
-                createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-                updateTime: moment().format('YYYY-MM-DD HH:mm:ss')
-                // nickName: userInfo.nickName,       //用户名称
-                // gender: userInfo.gender,      //用户性别，默认为1；1是男性，2是女性
-                // avatarUrl: userInfo.avatarUrl,
-            }).then(result => {
-                var token = jwt.sign({ openid: data.openid }, 'app.get(superSecret)', {
-                    'expiresIn': 60 * 60 * 24 // 设置过期时间
-                });
-                res.json({
-                    code: 200,
-                    message: '获取openid成功',
-                    data: {
+            var token = jwt.sign({ openid: data.openid }, 'app.get(superSecret)', {
+                'expiresIn': 60 * 60 * 24 // 设置过期时间
+            });
+            User.findOne({ openid: data.openid }).then(user => {
+                if (!user) {
+                    User.createAsync({
                         openid: data.openid,
-                        session_key: data.session_key,
-                        token: token
-                    }
-                })
-            }).catch(err => {
-                    console.log('err1', err)
-                    res.json({
-                        code: -200,
-                        message: err.toString(),
-                        data
+                        createTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+                        updateTime: moment().format('YYYY-MM-DD HH:mm:ss')
+                    }).then(result => {
+                        res.json({
+                            code: 200,
+                            message: '获取openid成功',
+                            data: {
+                                openid: data.openid,
+                                token: token
+                            }
+                        })
+                    }).catch(err => {
+                        console.log('err1', err)
+                        res.json({
+                            code: -200,
+                            message: err.toString(),
+                            data
+                        })
                     })
-                })
-
-        }else {
+                } else {
+                    res.json({
+                        code: 200,
+                        message: 'login success',
+                        data: {
+                            token: token,
+                            openid: data.openid
+                        }
+                    })
+                }
+            })
+        } else {
             console.log('err2', err)
             res.json({
                 code: -200,

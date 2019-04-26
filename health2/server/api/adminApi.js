@@ -15,6 +15,7 @@ exports.login = (req, res) => {
         	 var token = jwt.sign(result.toJSON(), 'app.get(superSecret)', {
             'expiresIn': 60*60*24 // 设置过期时间
         });
+
             res.json({
                 code: 200,
                 message: '登录成功',

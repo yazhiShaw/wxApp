@@ -53,9 +53,16 @@ exports.addPic = (req, res) => {
         if (err) {
             console.log(err);
         } else {
+<<<<<<< HEAD
             const extname = path.extname(files.file[0].originalFilename); //后缀
             const oldpath = path.normalize(files.file[0].path); // 路径
+            const nameID = (uuid.v4()).replace(/\-/g, ''); // 生成唯一标识符
+=======
+            console.log(files)
+            const extname = path.extname(files.file[0].originalFilename);
+            const oldpath = path.normalize(files.file[0].path);
             const nameID = (uuid.v4()).replace(/\-/g, '');
+>>>>>>> 311c08b2d272574c94c44b7db5f3a7e1ca20b4fe
             let newfilename = nameID + extname;
             var newpath = './file/images/' + newfilename;
             // //改名
@@ -208,7 +215,6 @@ exports.addFocus = (req, res) => {
 }
 // 添加活动
 exports.addMyAct = (req, res) => {
-	console.log(2333333333333333333)
     const { actTitle, actContent, actTime, actPlace, openid, nickName, name, avatarUrl, tel, Idcard } = req.body
     let data = {
         actTitle,

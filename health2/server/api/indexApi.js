@@ -208,7 +208,6 @@ exports.addFocus = (req, res) => {
 }
 // 添加活动
 exports.addMyAct = (req, res) => {
-	console.log(2333333333333333333)
     const { actTitle, actContent, actTime, actPlace, openid, nickName, name, avatarUrl, tel, Idcard } = req.body
     let data = {
         actTitle,
