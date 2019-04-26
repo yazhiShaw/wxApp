@@ -76,7 +76,7 @@ App({
     })
   },
   // 获取用户openid
-  getOpenid: function (userInfo) {
+  getOpenid: function (userInfo) { // 拿到用户的openId加密到token
     const { getOpenidApi } = require('./api/api.js')
     return new Promise((resolve, reject) => {
       const app = getApp()

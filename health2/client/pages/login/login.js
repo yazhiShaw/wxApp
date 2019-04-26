@@ -9,9 +9,10 @@ Page({
   data: {
 
   },
-  // 获取用户头像
+  // 获取用户
   onGetUserInfo: function (e) {
     if (e.detail.userInfo) {
+      console.log(e.detail)
       app.globalData.userInfo = e.detail.userInfo;
       this.checkToken();
     }
@@ -22,7 +23,7 @@ Page({
     let token = wx.getStorageSync('token');
     if (!token) { // 没有token去登录
       app.getOpenid();
-    } else { // 有token保存用户信息
+    } else { // 有token保存用户信息 更新用户信息
       that.saveUserInfo();
     }
   },

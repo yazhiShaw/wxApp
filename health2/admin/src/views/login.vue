@@ -45,8 +45,7 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      debugger
+    submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           let data = {
@@ -63,6 +62,8 @@ export default {
                this.$message.success(res.message);
                this.$router.push("/user");
              } else if (+res.code == 401) {
+               this.$message.error(res.message);
+             }else if (+res.code == -200) {
                this.$message.error(res.message);
              }
              this.loadingInstance.close();

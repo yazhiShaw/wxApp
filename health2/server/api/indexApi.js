@@ -53,9 +53,9 @@ exports.addPic = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            const extname = path.extname(files.file[0].originalFilename);
-            const oldpath = path.normalize(files.file[0].path);
-            const nameID = (uuid.v4()).replace(/\-/g, '');
+            const extname = path.extname(files.file[0].originalFilename); //后缀
+            const oldpath = path.normalize(files.file[0].path); // 路径
+            const nameID = (uuid.v4()).replace(/\-/g, ''); // 生成唯一标识符
             let newfilename = nameID + extname;
             var newpath = './file/images/' + newfilename;
             // //改名

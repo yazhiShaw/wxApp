@@ -17,7 +17,6 @@ const publicApi = require('../api/publicApi.js')
 router.post('/admin/login', adminApi.login) // 登录
 router.get('/wx/getOpenid', userApi.getOpenid) //获取微信用户信息
 
-// 验证token
 router.use(function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token) {

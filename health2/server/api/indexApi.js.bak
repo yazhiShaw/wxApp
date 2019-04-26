@@ -53,8 +53,8 @@ exports.addPic = (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            const extname = path.extname(files.file[0].originalFilename);
-            const oldpath = path.normalize(files.file[0].path);
+            const extname = path.extname(files.file[0].originalFilename); //后缀
+            const oldpath = path.normalize(files.file[0].path); // 路径
             const nameID = (uuid.v4()).replace(/\-/g, '');
             let newfilename = nameID + extname;
             var newpath = './file/images/' + newfilename;
@@ -208,7 +208,7 @@ exports.addFocus = (req, res) => {
 }
 // 添加活动
 exports.addMyAct = (req, res) => {
-	console.log(11111111111111111111111111111111)
+	console.log(2333333333333333333)
     const { actTitle, actContent, actTime, actPlace, openid, nickName, name, avatarUrl, tel, Idcard } = req.body
     let data = {
         actTitle,
