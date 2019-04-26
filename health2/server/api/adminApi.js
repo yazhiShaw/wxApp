@@ -10,10 +10,10 @@ const jwt = require('jsonwebtoken');
 exports.login = (req, res) => {
     const { username, password } = req.body
     Admin.findOne({ username, password}).then(result => {
-        var token = jwt.sign(result.toJSON(), 'app.get(superSecret)', {
-            'expiresIn': 2000 // 设置过期时间
-        });
         if (result) {
+            var token = jwt.sign(result.toJSON(), 'app.get(superSecret)', {
+                'expiresIn': 2000 // 设置过期时间
+            });
             res.json({
                 code: 200,
                 message: '登录成功',
