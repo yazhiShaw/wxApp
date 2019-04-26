@@ -53,6 +53,7 @@ exports.addPic = (req, res) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(files)
             const extname = path.extname(files.file[0].originalFilename);
             const oldpath = path.normalize(files.file[0].path);
             const nameID = (uuid.v4()).replace(/\-/g, '');
@@ -208,7 +209,6 @@ exports.addFocus = (req, res) => {
 }
 // 添加活动
 exports.addMyAct = (req, res) => {
-	console.log(2333333333333333333)
     const { actTitle, actContent, actTime, actPlace, openid, nickName, name, avatarUrl, tel, Idcard } = req.body
     let data = {
         actTitle,
