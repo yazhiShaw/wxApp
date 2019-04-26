@@ -15,6 +15,12 @@ button::after{
   display: flex;
   align-items: center;
 }
+.column-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 .horizontal-center{
   display: flex;
   justify-content: space-between;
